@@ -141,9 +141,10 @@ public class SigninController {
 	}
 
 	@RequestMapping(value = "/driver/add.do", method = RequestMethod.POST)
-	public String Driver_add(@RequestParam("file") MultipartFile file, @ModelAttribute HttpServletRequest request,
-			HttpServletResponse response) {
-
+	public String Driver_add(@RequestParam("file") MultipartFile file, @ModelAttribute("driver") DriverVO driver,
+	HttpServletRequest request,	HttpServletResponse response) {
+	
+		
 		System.out.println("들어는왔음 ");
 
 		response.setContentType("text/plain; charset=UTF8");
@@ -159,11 +160,14 @@ public class SigninController {
 		String date = request.getParameter("date");
 		String info = request.getParameter("info");
 
+		//
+		String detailpath = "/upload/" + id;
+		
 		// 클라이언트가 선택한 파일이름 불러옴
 		String fileName = file.getOriginalFilename();
 		
 		//절대경로 
-		String path = request.getRealPath(driverPicture); /* upload폴더 만든거 , 실제 서비스가 되면 저장되는 폴더 */
+		String path = request.getRealPath(driverPicture); // upload폴더 만든거 , 실제 서비스가 되면 저장되는 폴더 
 		
 		//상대경로 
 		//String path1 = request.getSession();
@@ -173,11 +177,26 @@ public class SigninController {
 		
 		System.out.println(path);
 
+		
+		//정확한경로의 설정및 확인방법은 다음과같으며...
+	    String realFolder = ""; //파일경로를 알아보기위한 임시변수를 하나 만들고,
+	    String saveFolder = "filestorage"; //파일저장 폴더명을 설정한 뒤에...
+	    String encType = "UTF-8"; //인코딩방식도 함께 설정한 뒤,
+	    int maxSize = 100 * 1024 * 1024; //파일 최대용량까지 지정해주자.(현재 100메가)
+	 //   ServletContext context = getServletContext();
+	  //  realFolder = context.getRealPath(saveFolder);
+	    System.out.println("the realpath is : " + realFolder); // file path
+
+	    File dir = new File(realFolder); // 디렉토리 위치 지정
+		
+		
+		
+		
 		if (!destdir.exists()) {
 			destdir.mkdirs(); // 디렉토리 존재하지 않는다면 생성
 		}
 
-		File f = new File(path + fileName); /* java.io.File -import */ /* 경로에 이이름으로 */
+		File f = new File(path + fileName); 
 
 		if (!file.isEmpty()) {
 			boolean fileexists = destdir.exists(); // 파일 존재 유무 검사
@@ -188,7 +207,7 @@ public class SigninController {
 				f = new File(path + fileName);
 			}
 		}
-		/* 파일 복사 */
+		// 파일 복사 
 		try {
 			file.transferTo(f);
 		} catch (Exception e) {
