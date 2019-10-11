@@ -1,8 +1,10 @@
 package web.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -139,7 +141,7 @@ public class SigninController {
 	}
 
 	@RequestMapping(value = "/driver/add.do", method = RequestMethod.POST)
-	public String Driver_add(@RequestParam("file") MultipartFile file,@ModelAttribute HttpServletRequest request,
+	public String Driver_add(@RequestParam("file") MultipartFile file, @ModelAttribute HttpServletRequest request,
 			HttpServletResponse response) {
 
 		System.out.println("들어는왔음 ");
@@ -157,7 +159,45 @@ public class SigninController {
 		String date = request.getParameter("date");
 		String info = request.getParameter("info");
 
+		// 클라이언트가 선택한 파일이름 불러옴
+		String fileName = file.getOriginalFilename();
 		
+		//절대경로 
+		String path = request.getRealPath(driverPicture); /* upload폴더 만든거 , 실제 서비스가 되면 저장되는 폴더 */
+		
+		//상대경로 
+		//String path1 = request.getSession();
+
+		// 디렉토리 가져오기
+		File destdir = new File(path); 
+		
+		System.out.println(path);
+
+		if (!destdir.exists()) {
+			destdir.mkdirs(); // 디렉토리 존재하지 않는다면 생성
+		}
+
+		File f = new File(path + fileName); /* java.io.File -import */ /* 경로에 이이름으로 */
+
+		if (!file.isEmpty()) {
+			boolean fileexists = destdir.exists(); // 파일 존재 유무 검사
+
+			if (fileexists) { // 중복된 파일이 있다면
+				UUID uuid = UUID.randomUUID();
+				fileName = uuid.toString() + fileName;
+				f = new File(path + fileName);
+			}
+		}
+		/* 파일 복사 */
+		try {
+			file.transferTo(f);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("완");
+		
+		/////////////////////////////////////////////////////
 		UserVO uv = new UserVO();
 		uv.setUserid(id);
 		uv.setUserpwd(pw);
@@ -176,7 +216,7 @@ public class SigninController {
 
 		System.out.println("add 시작");
 
-		//userservice.addUser(uv);
+		service.addUser(uv);
 		driverservice.addDriver(dv);
 
 		System.out.println(uv);
@@ -192,7 +232,7 @@ public class SigninController {
 		try {
 			out = response.getWriter();
 
-			result = "addParentsSucces";
+			result = "addDriverSucces";
 			out.print(result);
 			out.flush();
 			out.close();
