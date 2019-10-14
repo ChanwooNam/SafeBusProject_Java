@@ -35,18 +35,15 @@ public class MapController {
 	}
 
 	@RequestMapping(value = "/routeInfo.do", method = RequestMethod.POST)
-	public String loginProc(UserVO vo,ParentsVO parentsvo, HttpServletRequest request, HttpServletResponse response) {
+	public String loginProc( HttpServletRequest request, HttpServletResponse response) {
 
 		response.setContentType("text/plain; charset=UTF8");
 		PrintWriter out;
-		
-		
+			
 		String state = request.getParameter("state");
 		String station = request.getParameter("station"); // 안드로이드에서 station을 받는다 . 
 		String returns = "";
-		   
-		
-	
+		   	
 		return null;
 	}
 }

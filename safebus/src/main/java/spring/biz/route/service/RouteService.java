@@ -12,5 +12,7 @@ public interface RouteService {
 	RouteVO getRoute(String station);
 
 	List<RouteVO> getRouteList();
+	
+	String getRouteInfo_gokinder (String state, String station1, String station2);
 
 }

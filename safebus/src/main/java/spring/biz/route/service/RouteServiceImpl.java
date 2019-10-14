@@ -56,6 +56,13 @@ public class RouteServiceImpl implements RouteService{
 	public List<RouteVO> getRouteList() {
 		return dao.getRouteList();
 	}
+
+
+	@Override
+	public String getRouteInfo_gokinder(String state, String station1, String station2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
