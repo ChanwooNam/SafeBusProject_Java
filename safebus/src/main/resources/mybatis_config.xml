@@ -8,7 +8,7 @@
      <typeAlias type="spring.biz.user.vo.UserVO" alias="uservo"/>
      <typeAlias type="spring.biz.parents.vo.ParentsVO" alias="parentsvo"/>
      <typeAlias type="spring.biz.driver.vo.DriverVO" alias="drivervo"/>
-     <typeAlias type="spring.biz.driver.vo.TeacherVO" alias="teachervo"/>
+     <typeAlias type="spring.biz.teacher.vo.TeacherVO" alias="teachervo"/>
      <typeAlias type="spring.biz.route.vo.RouteVO" alias="routevo"/>
  </typeAliases>
   

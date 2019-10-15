@@ -20,20 +20,19 @@ public class RouteServiceImpl implements RouteService{
 	
 	@Autowired
 	ApplicationContext context;
-
+	
 	public RouteServiceImpl() {
 		super();
 	}
-
-
+	
 	public RouteDAO getDao() {
 		return dao;
 	}
-
+	
 	public void setDao(RouteDAO dao) {
 		this.dao = dao;
 	}
-
+	
 	public ApplicationContext getContext() {
 		return context;
 	}
@@ -56,11 +55,10 @@ public class RouteServiceImpl implements RouteService{
 	public List<RouteVO> getRouteList() {
 		return dao.getRouteList();
 	}
-
-
+	
 	@Override
 	public String getRouteInfo_gokinder(String state, String station1, String station2) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

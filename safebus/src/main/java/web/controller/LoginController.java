@@ -84,7 +84,6 @@ public class LoginController {
 				// String json = mapper.writeValueAsString(user);
 				
 				
-				
 				result = "success";
 				out.print(result +"/"+ station+"/"+ car_number);
 				out.flush();

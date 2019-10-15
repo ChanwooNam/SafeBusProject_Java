@@ -142,6 +142,7 @@ public class ConnectDB3 {
 	       	//System.out.println("dddddd");
 	       	returns = "정류장을 입력해주세요";
 	       }
+	       
 	       else {	
 	       	while (rs.next()) {
 	       		returns = "경로 정보 있음";
@@ -177,8 +178,10 @@ public class ConnectDB3 {
 		Socket socket;
 		BufferedReader br;
 		PrintWriter out;
+		
 		//버튼에서 action이 발생(클릭)했을 때 호출
 		//접속버튼
+		
 		try {
 			// 클라이언트는 버튼을 누르면 서버쪽에 Socket접속을 시도
 			// Socket(url(서버쪽 ip주소), 접속할 port번호)
