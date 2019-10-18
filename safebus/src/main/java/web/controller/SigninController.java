@@ -28,6 +28,7 @@ import spring.biz.driver.service.DriverService;
 import spring.biz.driver.vo.DriverVO;
 import spring.biz.parents.service.ParentsService;
 import spring.biz.parents.vo.ParentsVO;
+import spring.biz.route.service.RouteService;
 import spring.biz.teacher.service.TeacherService;
 import spring.biz.teacher.vo.TeacherVO;
 import spring.biz.user.service.UserService;
@@ -44,7 +45,8 @@ public class SigninController {
 	DriverService driverservice;
 	@Autowired
 	TeacherService teacherservice;
-	
+	@Autowired
+	RouteService routeservice;
 	
 	@Autowired
 	private DataSourceTransactionManager transactionManager;
@@ -112,6 +114,10 @@ public class SigninController {
 
 		parentsservice.addParents(pv);
 
+		// 해당되는 starion에 count +1
+		int resultCount = routeservice.addCount(station);
+		System.out.println("addCount :" +resultCount);
+		
 		System.out.println(user);
 		System.out.println(pv);
 
@@ -238,7 +244,7 @@ public class SigninController {
 			
 		String driverlicense = request.getParameter("driverLicense");
 		String carnum = request.getParameter("carNum");
-		String driverpicture = request.getParameter("driverPicture");
+		//String driverpicture = request.getParameter("driverPicture");
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String name = request.getParameter("name");
@@ -260,8 +266,7 @@ public class SigninController {
 		dv.setDriver_phone(tel);
 		dv.setDriver_license(driverlicense);
 		dv.setCar_number(carnum);
-		dv.setDriver_img(driverpicture);
-		
+		//dv.setDriver_img(driverpicture);
 
 		System.out.println("add 시작");
 

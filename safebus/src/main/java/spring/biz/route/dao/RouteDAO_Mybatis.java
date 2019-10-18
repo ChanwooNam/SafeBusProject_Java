@@ -39,6 +39,24 @@ public class RouteDAO_Mybatis implements RouteDAO{
 		return sqlSession.selectList("route.list");
 	}
 	
+	@Override
+	public int absent(String station) {
+				
+		
+		int result_num = sqlSession.update("route.absent", station);
+		System.out.println("결석 : " + result_num);
+		return result_num; 
+	}
 	
+	@Override
+	public int present(String station) {
+		return sqlSession.update("route.present", station);
+	}
+
+	// 회원가입시 해당 station count 올리기 위한 함수 
+	@Override
+	public int addCount(String station) {
+		return sqlSession.update("route.addcount", station);
+	}
 
 }

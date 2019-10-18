@@ -14,5 +14,10 @@ public interface RouteService {
 	List<RouteVO> getRouteList();
 	
 	String getRouteInfo_gokinder (String state, String station1, String station2);
+	
+	int absent(String station);
 
+	int present(String station);
+
+	int addCount(String station);
 }

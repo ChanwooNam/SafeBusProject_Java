@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="route">
+<mapper namespace="map">
    
 	
 	<insert id="add" parameterType="routevo">
@@ -12,6 +12,19 @@
 		#{baby_gender}, #{parent_name}, #{parent_phone}, #{address}, #{station})
 	</insert>
 	
+	
+	<select id="getRouteInfo_gohome" resultType="routevo">
+		select * from route 
+		<!-- [CDATA[
+		where route in (select route from route where station = #{station})
+		and to_number(station)<= to_number(#{station})
+		]] -->
+		order by station  
+	</select>
+	
+	
+	
+	
 	<select id="list" resultType="routevo">
 		select * from route
 	</select>
@@ -19,17 +32,7 @@
 	<select id="getroute" resultType="routevo">
 		select * from route where station = #{station}
 	</select>
-	<update id="absent" parameterType="String">
-		update route set absent = absent+1, count = count-1 where station=#{station}		
-	</update>
 	
-	<update id="present" parameterType="routevo" >
-		update route set absent = absent-1, count = count+1 where station=#{station}	
-	</update>
-	
-	<update id="addcount" parameterType="String">
-		update route set count = count+1 where station=#{station}
-	</update>
 				
 </mapper>
 

@@ -13,4 +13,9 @@ public interface RouteDAO {
 
 	List<RouteVO> getRouteList();
 	
+	int absent(String station);
+
+	int present(String station);
+	
+	int addCount(String station);
 }
